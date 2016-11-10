@@ -1,0 +1,78 @@
+#include <AFMotor.h>
+
+
+#define frenteE 1
+#define frenteD 4
+#define trasE 1
+#define trasD 1
+#define torque 150
+
+/* ARDUINO PONTE H
+#define frenteE 2
+#define trasD 3
+#define frenteD 4
+#define trasE 1
+#define torque 150
+
+/* ARDUINO MEGA
+#define frenteE 4 => A2
+#define trasD 5 => A3
+#define frenteD 2 => A0
+#define trasE 3 => A1
+#define torque 255
+ */
+ 
+AF_DCMotor motorFrenteE(frenteE); //Seleciona o motor 1
+AF_DCMotor motorFrenteD(frenteD);
+AF_DCMotor motorTrasE(trasE);
+AF_DCMotor motorTrasD(trasD);
+
+/* Para Desligar o motor:
+ *  motorFrenteE.setSpeed(0);
+ *  motorFrenteE.run(RELEASE); */
+
+void andarFrente() 
+{
+motorFrenteE.run(FORWARD); //Gira o motor sentido horario
+motorFrenteD.run(FORWARD);
+motorTrasE.run(FORWARD);
+motorTrasD.run(FORWARD);
+}
+
+void andarTras()
+{
+  motorFrenteE.run(BACKWARD); //Gira o motor sentido anti-horario
+  motorFrenteD.run(BACKWARD);
+  motorTrasE.run(BACKWARD);
+  motorTrasD.run(BACKWARD);
+}
+
+void andarEsquerda() 
+{
+motorFrenteE.run(BACKWARD);
+motorFrenteD.run(FORWARD);
+motorTrasE.run(BACKWARD);
+motorTrasD.run(FORWARD);
+}
+
+void andarDireita()
+{
+motorFrenteE.run(FORWARD);
+motorFrenteD.run(BACKWARD);
+motorTrasE.run(FORWARD);
+motorTrasD.run(BACKWARD);
+}
+ 
+void setup()
+{
+delay(2000); 
+motorFrenteE.setSpeed(torque);
+motorFrenteD.setSpeed(torque);
+motorTrasE.setSpeed(torque);
+motorTrasD.setSpeed(torque);
+}
+ 
+void loop()
+{
+  motorFrenteD.run(FORWARD);
+}
